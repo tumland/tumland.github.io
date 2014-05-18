@@ -1,3 +1,6 @@
+
+s_bb_sprites = s_sprites;
+
 var Paddle = cc.Sprite.extend({
     prevX:0,
     prevPrevX:0,
@@ -158,55 +161,6 @@ var MainLayer = cc.LayerColor.extend({
 
         cc.associateWithNative( this, cc.LayerColor );
     },
-
-    getTexture: function (name) {
-        return cc.TextureCache.getInstance()
-            .addImage('sprites/' + name + '.png');
-    },
-
-    addObject: function (desc) {
-        var sprite = cc.Sprite.createWithTexture(this.getTexture(desc.name));
-
-        sprite.setAnchorPoint(desc.anchor || cc.p(0.5, 0.5));
-        sprite.setScaleX(desc.scaleX || desc.scale || 1);
-        sprite.setScaleY(desc.scaleY || desc.scale || 1);
-        sprite.setRotation(desc.rotation || 0);
-        sprite.setPosition(cc.p(desc.x || 0, desc.y || 0));
-
-        desc.shape && b2.enablePhysicsFor({
-            type: desc.type,
-            shape: desc.shape,
-            sprite: sprite,
-            radius: desc.radius,
-            density: desc.density,
-            userData: desc.userData
-        });
-
-        this.addChild(sprite, desc.z || 0);
-        return sprite;
-    },
-
-    addObjectFromSprite: function (desc) {
-        var sprite = desc.sprite;
-
-        sprite.setAnchorPoint(desc.anchor || cc.p(0.5, 0.5));
-        sprite.setScaleX(desc.scaleX || desc.scale || 1);
-        sprite.setScaleY(desc.scaleY || desc.scale || 1);
-        sprite.setRotation(desc.rotation || 0);
-        sprite.setPosition(cc.p(desc.x || 0, desc.y || 0));
-
-        desc.shape && b2.enablePhysicsFor({
-            type: desc.type,
-            shape: desc.shape,
-            sprite: sprite,
-            radius: desc.radius,
-            density: desc.density,
-            userData: desc.userData
-        });
-
-        this.addChild(sprite, desc.z || 0);
-        return sprite;
-    },
  
     // 4
     onEnter:function () {
@@ -273,10 +227,6 @@ var MainLayer = cc.LayerColor.extend({
         this._bricks.push(brick);
     },
 
-    //locationTouchedOrClicked: function(location) {
-    //    ;
-    //},
-
     onMouseUp:function (event) {
         //var location = event.getLocation();
         for (var i = 0; i < this._balls.length; i++) {            
@@ -295,14 +245,6 @@ var MainLayer = cc.LayerColor.extend({
     onMouseDragged:function (event) {
         this.onMouseMoved(event);
     },
-     
-    //onTouchesEnded:function (touches, event) {
-    //   if (touches.length <= 0)
-    //        return;
-    //    var touch = touches[0];
-    //    var location = touch.getLocation();
-    //    this.locationTapped(location);
-    //},
 
     checkCollision:function (object1, object2) {
         var object1rect = object1.getBoundingBox();
