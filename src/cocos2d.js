@@ -18,8 +18,8 @@
             './src/splash.js',
             './src/resource.js',
             './src/game.js',
-            './src/main.js',
-            './src/gameover.js'
+            './src/gameover.js',
+            './src/main.js'
         ]
     };
  
